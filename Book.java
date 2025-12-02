@@ -3,13 +3,17 @@ public class Book {
     String title;
     String author;
     String genre;
+    String sinopsis;
+    String tahunTerbit;
     double rating;
 
-    public Book(int id, String title, String author, String genre, double rating) {
+    public Book(int id, String title, String author, String genre, String sinopsis, String tahunTerbit, double rating) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.tahunTerbit = tahunTerbit;
+        this.sinopsis = sinopsis;
         this.rating = rating;
     }
 }
@@ -23,4 +27,3 @@ public class Book {
  * Isinya cuma data mentah.
  * ==========================================
  */
-//kalo ada yang merasa masih kurang ato mau di tambahin tambahin aja yaaa :)
