@@ -1,4 +1,4 @@
-public class DoubleLinkedList {
+public class DoublyLinkedList {
 
     private class DLLNode {
         Book data;
@@ -16,7 +16,7 @@ public class DoubleLinkedList {
     private DLLNode tail;
     private int size;
 
-    public DoubleLinkedList() {
+    public DoublyLinkedList() {
         head = null;
         tail = null;
         size = 0;
@@ -54,7 +54,7 @@ public class DoubleLinkedList {
         size++;
     }
 
-    // INSERT 
+    // INSERT
     public void insertAt(Book book, int index) {
         if (index < 0 || index > size) {
             System.out.println("Index out of range!");
@@ -101,10 +101,12 @@ public class DoubleLinkedList {
             if (current.data.equals(book)) {
                 if (current == head) {
                     head = head.next;
-                    if (head != null) head.prev = null;
+                    if (head != null)
+                        head.prev = null;
                 } else if (current == tail) {
                     tail = tail.prev;
-                    if (tail != null) tail.next = null;
+                    if (tail != null)
+                        tail.next = null;
                 } else {
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
@@ -127,4 +129,22 @@ public class DoubleLinkedList {
             temp = temp.next;
         }
     }
+
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Daftar buku kosong.");
+            return;
+        }
+
+        DLLNode current = head;
+        System.out.println("=== LIST BUKU ANDA ===");
+
+        while (current != null) {
+            System.out.println(current.data.toString());
+            current = current.next;
+        }
+
+        System.out.println("======================");
+    }
+
 }
