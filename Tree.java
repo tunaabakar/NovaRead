@@ -1,0 +1,57 @@
+public class Tree {
+    NodeTree root;
+
+    public void insertGenre(String genre) {
+        root = insertGenreRecursive(root, genre);
+    }
+
+    private NodeTree insertGenreRecursive(NodeTree node, String genre) {
+        if (node == null) {
+            return new NodeTree(genre);
+        }
+        if (genre.compareToIgnoreCase(node.genre) < 0) {
+            node.left = insertGenreRecursive(node.left, genre);
+        } else if (genre.compareToIgnoreCase(node.genre) > 0) {
+            node.right = insertGenreRecursive(node.right, genre);
+        }
+        return node;
+    }
+
+    public NodeTree findGenre(String genre) {
+        return findGenreRecursive(root, genre);
+    }
+
+    private NodeTree findGenreRecursive(NodeTree node, String genre) {
+        if (node == null || node.genre.equalsIgnoreCase(genre)) {
+            return node;
+        }
+        if (genre.compareToIgnoreCase(node.genre) < 0) {
+            return findGenreRecursive(node.left, genre);
+        } else {
+            return findGenreRecursive(node.right, genre);
+        }
+    }
+
+    public void insertBookToGenre(String genre, Book book) {
+        NodeTree genreNode = findGenre(genre);
+        if (genreNode == null) {
+            insertGenre(genre);
+            genreNode = findGenre(genre);
+        }
+        genreNode.books.addLast(book);
+    }
+
+    public void displayInOrder() {
+        displayInOrderRecursive(root);
+    }
+
+    private void displayInOrderRecursive(NodeTree node) {
+        if (node != null) {
+            displayInOrderRecursive(node.left);
+            System.out.println("Genre: " + node.genre);
+            node.books.displayForward();
+            System.out.println();
+            displayInOrderRecursive(node.right);
+        }
+    }
+}
