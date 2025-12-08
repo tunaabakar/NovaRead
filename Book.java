@@ -4,6 +4,7 @@ public class Book {
     String author;
     String genre;
     double rating;
+    Book next;
 
     public Book(int id, String title, String author, String genre, double rating) {
         this.id = id;
