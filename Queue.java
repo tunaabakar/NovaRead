@@ -1,8 +1,8 @@
-public class QueueNode {
+public class Queue {
     Book data;
-    QueueNode next;
+    Queue next;
 
-    public QueueNode(Book data) {
+    public Queue(Book data) {
         this.data = data;
         this.next = null;
     }
@@ -14,6 +14,7 @@ public class QueueNode {
  * ==========================================
  * Fungsi:
  * Node sederhana khusus untuk fitur Antrian (Queue).
- * Mirip StackNode, tapi dipisah biar kodenya rapi dan jelas mana node buat antriannya sama mana node buat history-nya.
+ * Mirip StackNode, tapi dipisah biar kodenya rapi dan jelas mana node buat
+ * antriannya sama mana node buat history-nya.
  * ==========================================
  */

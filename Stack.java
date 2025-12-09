@@ -1,8 +1,8 @@
-public class StackNode {
+public class Stack {
     Book data;
-    StackNode next;
+    Stack next;
 
-    public StackNode(Book data) {
+    public Stack(Book data) {
         this.data = data;
         this.next = null;
     }
