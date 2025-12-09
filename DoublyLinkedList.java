@@ -1,19 +1,16 @@
 public class DoublyLinkedList {
+    Book data;
+    DoublyLinkedList prev;
+    DoublyLinkedList next;
 
-    private class DLLNode {
-        Book data;
-        DLLNode prev;
-        DLLNode next;
-
-        public DLLNode(Book data) {
-            this.data = data;
-            this.prev = null;
-            this.next = null;
-        }
+    public DoublyLinkedList(Book data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
     }
 
-    private DLLNode head;
-    private DLLNode tail;
+    private DoublyLinkedList head;
+    private DoublyLinkedList tail;
     private int size;
 
     public DoublyLinkedList() {
@@ -28,7 +25,7 @@ public class DoublyLinkedList {
 
     // menambah di depan
     public void addFirst(Book book) {
-        DLLNode newNode = new DLLNode(book);
+        DoublyLinkedList newNode = new DoublyLinkedList(book);
 
         if (isEmpty()) {
             head = tail = newNode;
@@ -42,7 +39,7 @@ public class DoublyLinkedList {
 
     // menambah di belakang
     public void addLast(Book book) {
-        DLLNode newNode = new DLLNode(book);
+        DoublyLinkedList newNode = new DoublyLinkedList(book);
 
         if (isEmpty()) {
             head = tail = newNode;
@@ -71,8 +68,8 @@ public class DoublyLinkedList {
             return;
         }
 
-        DLLNode newNode = new DLLNode(book);
-        DLLNode current = head;
+        DoublyLinkedList newNode = new DoublyLinkedList(book);
+        DoublyLinkedList current = head;
         int count = 0;
 
         while (count < index) {
@@ -95,7 +92,7 @@ public class DoublyLinkedList {
             return;
         }
 
-        DLLNode current = head;
+        DoublyLinkedList current = head;
 
         while (current != null) {
             if (current.data.equals(book)) {
@@ -123,7 +120,7 @@ public class DoublyLinkedList {
 
     // Cetak list
     public void printList() {
-        DLLNode temp = head;
+        DoublyLinkedList temp = head;
         while (temp != null) {
             System.out.println(temp.data);
             temp = temp.next;
@@ -136,7 +133,7 @@ public class DoublyLinkedList {
             return;
         }
 
-        DLLNode current = head;
+        DoublyLinkedList current = head;
         System.out.println("=== LIST BUKU ANDA ===");
 
         while (current != null) {
