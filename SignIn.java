@@ -1,20 +1,27 @@
 import java.util.Scanner;
 
 public class SignIn {
-    Scanner scanner = new Scanner(System.in);
-    Reader reader = new Reader();
 
-    System.out.print("Masukkan nama: ");
-    String name = scanner.nextLine();
-    System.out.print("Masukkan email: ");
-    String email = scanner.nextLine();
-    System.out.print("Masukkan username: ");
-    String username = scanner.nextLine();
-    System.out.print("Masukkan password: ");
-    String password = scanner.nextLine();
-    reader = new Reader(name, email, username, password);
+    public Reader signUp() {
+        Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Pendaftaran berhasil! Selamat datang, " + reader.name + "!");
+        System.out.print("Masukkan nama: ");
+        String name = scanner.nextLine();
 
-    
+        System.out.print("Masukkan email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Masukkan username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Masukkan password: ");
+        String password = scanner.nextLine();
+
+        Reader reader = new Reader(name, email, username, password);
+
+        System.out.println("Pendaftaran berhasil! Selamat datang, " + reader.name + "!");
+
+        return reader; // penting!
+
+    }
 }
