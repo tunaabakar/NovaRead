@@ -1,20 +1,72 @@
 public class Queue {
-    Book data;
-    Queue next;
 
-    public Queue(Book data) {
-        this.data = data;
-        this.next = null;
+    private class Node {
+        Book data;
+        Node next;
+
+        Node(Book data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node front;
+    private Node rear;
+
+    public Queue() {
+        front = null;
+        rear = null;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+
+    public void enqueue(Book book) {
+        Node newNode = new Node(book);
+
+        if (isEmpty()) {
+            front = rear = newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+
+    public Book dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue kosong!");
+            return null;
+        }
+
+        Book removed = front.data;
+        front = front.next;
+
+        if (front == null) {
+            rear = null;
+        }
+
+        return removed;
+    }
+
+    public Book peek() {
+        if (isEmpty())
+            return null;
+        return front.data;
+    }
+
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Queue kosong.");
+            return;
+        }
+
+        Node current = front;
+        System.out.println("=== READING QUEUE ===");
+        while (current != null) {
+            System.out.println(current.data.title);
+            current = current.next;
+        }
+        System.out.println("=====================");
     }
 }
-
-/*
- * ==========================================
- * CLASS: QueueNode
- * ==========================================
- * Fungsi:
- * Node sederhana khusus untuk fitur Antrian (Queue).
- * Mirip StackNode, tapi dipisah biar kodenya rapi dan jelas mana node buat
- * antriannya sama mana node buat history-nya.
- * ==========================================
- */

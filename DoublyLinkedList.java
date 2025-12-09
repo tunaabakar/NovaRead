@@ -144,4 +144,11 @@ public class DoublyLinkedList {
         System.out.println("======================");
     }
 
+    public DoublyLinkedList getHead() {
+        return head;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }

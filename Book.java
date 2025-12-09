@@ -27,4 +27,13 @@ public class Book {
                 " | Tag: " + tag +
                 " | Last Read: " + lastDate;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
 }
