@@ -46,6 +46,31 @@ public class Tree {
         }
     }
 
+
+    public void searchByGenre(String genre) {
+        NodeTree genreNode = findGenre(genre);
+
+        System.out.println("\n>> Filter Genre: '" + genre + "'");
+        boolean found = false;
+
+        if (genreNode != null && !genreNode.books.isEmpty()) {
+            DoublyLinkedList current = genreNode.books.getHead();
+            while (current != null) {
+                if (current.data != null) {
+                    printResult(current.data);
+                    found = true;
+                }
+                current = current.next;
+            }
+        }
+
+        if (!found) {
+            System.out.println("   (Tidak ditemukan)");
+        }
+    }
+
+
+
     public void insertBookToGenre(String genre, Book book) {
         NodeTree genreNode = findGenre(genre);
         if (genreNode == null) {
@@ -54,6 +79,12 @@ public class Tree {
         }
         genreNode.books.addLast(book);
     }
+
+    // Output jika buku ditemukan
+    private void printResult(Book b) {
+        System.out.println("   Found: " + b.title + " (" + b.rating + "/5.0) - " + b.genre);
+    }
+
 
     public void displayInOrder() {
         displayInOrderRecursive(root);

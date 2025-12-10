@@ -5,10 +5,20 @@ public class Favorite {
     Favorite next;
     Favorite prev;
 
+    // Constructor untuk LIST kosong (dipakai di Main: new Favorite())
+    public Favorite() {
+        this.book = null;
+        this.head = null;
+        this.tail = null;
+        this.next = null;
+        this.prev = null;
+    }
+
+    // Constructor untuk NODE berisi 1 buku (dipakai di addFavorite)
     public Favorite(Book book) {
         this.book = book;
-        this.tail = null;
-        this.head = null;
+        this.next = null;
+        this.prev = null;
     }
 
     public void addFavorite(Book book) {
