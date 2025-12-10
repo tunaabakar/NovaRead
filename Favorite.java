@@ -5,10 +5,22 @@ public class Favorite {
     Favorite next;
     Favorite prev;
 
+    // Konstruktor untuk membuat node favorit yang menyimpan satu Book.
+    // Digunakan ketika menambahkan buku ke daftar favorit (sebagai node).
     public Favorite(Book book) {
         this.book = book;
         this.tail = null;
         this.head = null;
+    }
+
+    // Konstruktor tanpa argumen untuk membuat struktur daftar favorit kosong (container).
+    // Gunakan ini ketika Anda ingin membuat daftar favorit baru yang akan menyimpan node-node.
+    public Favorite() {
+        this.book = null;
+        this.head = null;
+        this.tail = null;
+        this.next = null;
+        this.prev = null;
     }
 
     public void addFavorite(Book book) {
