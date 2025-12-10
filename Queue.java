@@ -69,4 +69,9 @@ public class Queue {
         }
         System.out.println("=====================");
     }
+
+    public void printQueue() {
+        display();
+    }
+
 }

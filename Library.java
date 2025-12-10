@@ -1,6 +1,5 @@
 public class Library {
-
-    DoublyLinkedList bookList;
+    public DoublyLinkedList bookList;
 
     public Library() {
         bookList = new DoublyLinkedList(); // library langsung punya DLL
@@ -19,4 +18,5 @@ public class Library {
         }
         bookList.display();
     }
+
 }

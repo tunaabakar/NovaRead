@@ -12,10 +12,6 @@ public class Stack {
 
     private Node top;
 
-    public Stack() {
-        top = null;
-    }
-
     public boolean isEmpty() {
         return top == null;
     }

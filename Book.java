@@ -20,6 +20,10 @@ public class Book {
         this.lastDate = lastDate;
     }
 
+    public Book(String title) {
+        this.title = title;
+    }
+
     public String toString() {
         return "[" + id + "] " + title + " - " + author +
                 " | Genre: " + genre +

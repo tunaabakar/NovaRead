@@ -1,19 +1,18 @@
-
-class NodeTree {
-    String genre;
-    DoublyLinkedList books;
-    NodeTree left;
-    NodeTree right;
-
-    public NodeTree(String genre) {
-        this.genre = genre;
-        this.books = new DoublyLinkedList();
-        this.left = null;
-        this.right = null;
-    }
-}
-
 public class Tree {
+    class NodeTree {
+        String genre;
+        DoublyLinkedList books;
+        NodeTree left;
+        NodeTree right;
+
+        public NodeTree(String genre) {
+            this.genre = genre;
+            this.books = new DoublyLinkedList();
+            this.left = null;
+            this.right = null;
+        }
+    }
+
     NodeTree root;
 
     public void insertGenre(String genre) {

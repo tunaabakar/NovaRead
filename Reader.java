@@ -1,11 +1,10 @@
 public class Reader {
-
     String name, email, username, password;
     Library library;
     Stack readingStack;
     Queue history;
-
-    private DoublyLinkedList readingList;
+    DoublyLinkedList readingList;
+    Favorite favorites;
 
     public Reader(String nm, String em, String uname, String pwd) {
         this.name = nm;
@@ -20,14 +19,28 @@ public class Reader {
 
     }
 
+    public Reader(String uname, String pass) {
+        this.username = uname;
+        this.password = pass;
+    }
+
     public void addToLibrary(Book book) {
         library.addBook(book);
         System.out.println(book.title + " telah ditambahkan ke library anda");
     }
 
-    public void addToReadingStack(Book book) {
+    public void addToReadingList(Book book) {
         readingStack.push(book);
         System.out.println(book.title + " berhasil ditambahkan ke antrian bacaan.");
+    }
+
+    public void showHistory() {
+        if (history.isEmpty()) {
+            System.out.println("Belum ada riwayat bacaan.");
+            return;
+        }
+        System.out.println("History bacaan:");
+        history.printQueue();
     }
 
     public void readNextBook() {

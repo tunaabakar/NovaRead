@@ -1,7 +1,7 @@
 public class DoublyLinkedList {
-    Book data;
-    DoublyLinkedList prev;
-    DoublyLinkedList next;
+    public Book data;
+    public DoublyLinkedList prev;
+    public DoublyLinkedList next;
 
     public DoublyLinkedList(Book data) {
         this.data = data;
@@ -9,9 +9,9 @@ public class DoublyLinkedList {
         this.next = null;
     }
 
-    private DoublyLinkedList head;
-    private DoublyLinkedList tail;
-    private int size;
+    public DoublyLinkedList head;
+    public DoublyLinkedList tail;
+    public int size;
 
     public DoublyLinkedList() {
         head = null;
@@ -93,9 +93,10 @@ public class DoublyLinkedList {
         }
 
         DoublyLinkedList current = head;
-
         while (current != null) {
-            if (current.data.equals(book)) {
+            if (current.data != null && current.data.title != null &&
+                    current.data.title.equalsIgnoreCase(book.title)) {
+
                 if (current == head) {
                     head = head.next;
                     if (head != null)
@@ -108,11 +109,11 @@ public class DoublyLinkedList {
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
                 }
-
                 size--;
                 return;
             }
             current = current.next;
+
         }
 
         System.out.println("Book tidak ditemukan dalam list!");

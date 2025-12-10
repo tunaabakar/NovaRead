@@ -11,15 +11,6 @@ public class Favorite {
         this.head = null;
     }
 
-    // public class FavoriteNode {
-    // FavoriteNode head;
-    // FavoriteNode tail;
-
-    public void LibraryFavorite() {
-        head = null;
-        tail = null;
-    }
-
     public void addFavorite(Book book) {
         Favorite newNode = new Favorite(book);
 
@@ -89,6 +80,5 @@ public class Favorite {
             System.out.println("- " + current.book);
             current = current.next;
         }
-        // }
     }
 }
