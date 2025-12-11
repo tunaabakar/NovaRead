@@ -119,7 +119,7 @@ public class DoublyLinkedList {
         System.out.println("Book tidak ditemukan dalam list!");
     }
 
-    // Cetak list
+    // Cetak list (versi lama, kalau masih dipakai di tempat lain)
     public void printList() {
         DoublyLinkedList temp = head;
         while (temp != null) {
@@ -128,6 +128,7 @@ public class DoublyLinkedList {
         }
     }
 
+    // ===================== DISPLAY BARU =====================
     public void display() {
         if (isEmpty()) {
             System.out.println("Daftar buku kosong.");
@@ -135,14 +136,27 @@ public class DoublyLinkedList {
         }
 
         DoublyLinkedList current = head;
-        System.out.println("=== LIST BUKU ANDA ===");
+        int no = 1;
+
+        System.out.println("============================================================");
+        System.out.println("                         LIST BUKU");
+        System.out.println("============================================================");
 
         while (current != null) {
-            System.out.println(current.data.toString());
+            Book b = current.data;
+
+            System.out.println(no + ". " + b.title + " - " + b.author);
+            System.out.println("    Genre  : " + b.genre);
+            System.out.println("    Rating : " + String.format("%.1f", b.rating));
+            System.out.println("    Tag    : " + b.tag);
+            System.out.println("    Last   : " + b.lastDate);
+            System.out.println();
+
             current = current.next;
+            no++;
         }
 
-        System.out.println("======================");
+        System.out.println("============================================================");
     }
 
     public DoublyLinkedList getHead() {

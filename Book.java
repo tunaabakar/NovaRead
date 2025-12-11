@@ -24,19 +24,26 @@ public class Book {
         this.title = title;
     }
 
-    public String toString() {
-        return "[" + id + "] " + title + " - " + author +
-                " | Genre: " + genre +
-                " | Rating: " + rating +
-                " | Tag: " + tag +
-                " | Last Read: " + lastDate;
-    }
+    @Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(title).append(" - ").append(author).append("\n");
+    sb.append("    Genre  : ").append(genre).append("\n");
+    sb.append("    Rating : ").append(String.format("%.1f", rating)).append("\n");
+    sb.append("    Tag    : ").append(tag).append("\n");
+    sb.append("    Last   : ").append(lastDate);
+
+    return sb.toString();
+}
+
+    
 
     public String getTitle() {
         return title;
     }
 
-    public double getRating() {
+    public double getRating() { 
         return rating;
     }
 
