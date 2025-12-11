@@ -115,6 +115,7 @@ public class MainMenu {
 
             switch (option) {
                 case 1 -> bookDB.printAllDatabase();
+                
                 case 2 -> searchMenu();
                 case 3 -> addFavorite(user);
                 case 4 -> {
@@ -122,7 +123,7 @@ public class MainMenu {
                     user.favorites.printFavorite();
                 }
                 case 5 -> {
-                    System.out.println("✔ Logged out.");
+                    System.out.println(" Logged out.");
                     return;
                 }
                 default -> System.out.println(" Invalid option!");
@@ -210,7 +211,7 @@ public class MainMenu {
     System.out.println("   ███▄  ██                     ██▄▄▄█▀                 ██");
     System.out.println("   ██ ▀█▄██ ▄███▄▀█▄ ██▀▄▀▀█▄   ██▀▀█▄   ▄█▀█▄ ▄▀▀█▄ ▄████");
     System.out.println("   ██   ▀██ ██ ██ ██▄██ ▄█▀██ ▄ ██  ██   ██▄█▀ ▄█▀██ ██ ██");
-    System.out.println(" ▀██▀    ██▄▀███▀  ▀█▀ ▄▀█▄██ ▀██▀  ▀██▀▄▀█▄▄▄▄▀█▄██▄█▀███");
+    System.out.println(" ▀██▀    ██▄▀███▀  ▀█▀  ▀█▄██ ▀██▀  ▀██▀▄▀█▄▄▄▄▀█▄██▄█▀███");
     System.out.println("                                                               ");
 }
 

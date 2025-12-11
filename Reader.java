@@ -12,16 +12,23 @@ public class Reader {
         this.username = uname;
         this.password = pwd;
 
-        this.library = new Library();
-        this.readingStack = new Stack();
-        this.history = new Queue();
-        this.readingList = new DoublyLinkedList();
+        this.library = new Library(); // Koleksi buku yang dimiliki pembaca
+        this.readingStack = new Stack(); // Antrian buku yang akan dibaca
+        this.history = new Queue(); // Riwayat buku yang sudah dibaca
+        this.readingList = new DoublyLinkedList(); // Daftar buku yang sedang dibaca
+        this.favorites = new Favorite(); // Daftar buku favorit pembaca
 
     }
 
     public Reader(String uname, String pass) {
         this.username = uname;
         this.password = pass;
+        
+        this.library = new Library(); // Koleksi buku yang dimiliki pembaca
+        this.readingStack = new Stack(); // Antrian buku yang akan dibaca
+        this.history = new Queue(); // Riwayat buku yang sudah dibaca
+        this.readingList = new DoublyLinkedList(); // Daftar buku yang sedang dibaca
+        this.favorites = new Favorite(); // Daftar buku favorit pembaca
     }
 
     public void addToLibrary(Book book) {

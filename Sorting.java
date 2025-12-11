@@ -76,6 +76,7 @@ public class Sorting {
         System.out.println(">> Berhasil diurutkan berdasarkan Tanggal (Terbaru).\\n");
     }
 
+    // Mengurutkan berdasarkan genre
     public static void sortByGenre(DoublyLinkedList list) {
         if (list == null)
             return;
