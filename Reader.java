@@ -34,12 +34,6 @@ public class Reader {
     //     this.favorites = new Favorite();
     // }
 
-    // Tambah ke library
-    public void addToLibrary(Book book) {
-        library.addBook(book);
-        System.out.println(book.title + " telah ditambahkan ke library anda");
-    }
-
     public void removeFromLibrary() {
         if (library.bookList.isEmpty()) {
             System.out.println("\nLibrary kamu masih kosong.");
@@ -160,8 +154,8 @@ public class Reader {
 
     // Tambah ke antrian baca (FIFO)
     public void addToReadingList(Book book) {
+        library.addBook(book);
         readingQueue.enqueue(book);
-        System.out.println(book.title + " berhasil ditambahkan ke antrian bacaan.");
     }
 
     // Lihat history

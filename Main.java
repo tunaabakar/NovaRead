@@ -100,13 +100,57 @@ public class Main {
         tree.insertBookToGenre(b18.genre, b18);
 
         // ==================== DATA PEMBACA ====================
-        readerList.addReader("meisya", "12345", "Meisya Ananda Puteri", "meisya@gmail.com");
-        readerList.addReader("ridho", "12345", "Ridho Hidayat", "ridho@gmail.com");
-        readerList.addReader("wahyu", "12345", "Wahyu Indra Purnama", "wahyu@gmail.com");
-        readerList.addReader("lalu", "12345", "Lalu Abdullah Rafi Asyari", "lalu@gmail.com");
-        readerList.addReader("nadine", "12345", "Nadine Desvita Alifia Putri", "nadine@gmail.com");
-        readerList.addReader("muhammad", "12345", "Muhammad Asrofi Sazani", "muhammad@gmail.com");
-        readerList.addReader("mutia", "12345", "Mutia Ayu Safitri", "mutia@gmail.com");
+        Reader r1 = readerList.addReader("meisya", "12345", "Meisya Ananda Puteri", "meisya@gmail.com");
+        Reader r2 = readerList.addReader("ridho", "12345", "Ridho Hidayat", "ridho@gmail.com");
+        Reader r3 = readerList.addReader("wahyu", "12345", "Wahyu Indra Purnama", "wahyu@gmail.com");
+        Reader r4 = readerList.addReader("lalu", "12345", "Lalu Abdullah Rafi Asyari", "lalu@gmail.com");
+        Reader r5 = readerList.addReader("nadine", "12345", "Nadine Desvita Alifia Putri", "nadine@gmail.com");
+        Reader r6 = readerList.addReader("muhammad", "12345", "Muhammad Asrofi Sazani", "muhammad@gmail.com");
+        Reader r7 = readerList.addReader("mutia", "12345", "Mutia Ayu Safitri", "mutia@gmail.com");
+
+        r1.addToReadingList(b18);
+        r1.addToReadingList(b9);
+        r1.addToReadingList(b12);
+        r1.addToReadingList(b5);
+
+        r2.addToReadingList(b3);
+        r2.addToReadingList(b4);
+        r2.addToReadingList(b10);
+        r2.addToReadingList(b13);
+
+        r3.addToReadingList(b2);
+        r3.addToReadingList(b6);
+        r3.addToReadingList(b14);
+        r3.addToReadingList(b8);
+
+
+        r4.addToReadingList(b7);
+        r4.addToReadingList(b1);
+        r4.addToReadingList(b11);
+        r4.addToReadingList(b16);
+
+        r5.addToReadingList(b9);
+        r5.addToReadingList(b3);
+        r5.addToReadingList(b5);
+        r5.addToReadingList(b17);
+
+        r6.addToReadingList(b12);
+        r6.addToReadingList(b6);
+        r6.addToReadingList(b14);
+        r6.addToReadingList(b2);
+
+        r7.addToReadingList(b4);
+        r7.addToReadingList(b8);
+        r7.addToReadingList(b15);
+        r7.addToReadingList(b1);
+
+
+
+
+
+
+
+
 
         pause();
 

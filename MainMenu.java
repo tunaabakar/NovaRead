@@ -143,8 +143,7 @@ public class MainMenu {
             System.out.println(" 2. Search Book");
             System.out.println(" 3. Show My Library");
             System.out.println(" 4. Show My Favorite");
-            System.out.println(" 5. Show My Profile");
-            System.out.println(" 6. Logout");
+            System.out.println(" 5. Logout");
             System.out.print("\nChoose: ");
             option = getInt();
 
@@ -166,8 +165,7 @@ public class MainMenu {
                     System.out.println("\n Favorite Books:");
                     user.favorites.printFavorite();
                 }
-                case 5 -> ProfileMenu(user);
-                case 6 -> {
+                case 5 -> {
                     System.out.println("\n Logged out.");
                     return;
                 }
@@ -175,57 +173,57 @@ public class MainMenu {
             }
         }
     }
-    public void ProfileMenu(Reader user) {
-        int choice;
+    // public void ProfileMenu(Reader user) {
+    //     int choice;
 
-        while (true) {
-            clearScreen();
-            System.out.println("╔══════════════════════════════╗");
-            System.out.println("║          USER PROFILE        ║");
-            System.out.println("╚══════════════════════════════╝\n");
+    //     while (true) {
+    //         clearScreen();
+    //         System.out.println("╔══════════════════════════════╗");
+    //         System.out.println("║          USER PROFILE        ║");
+    //         System.out.println("╚══════════════════════════════╝\n");
 
-            System.out.println("Username : " + user.username);
-            System.out.println("Nama     : " + user.name);
-            System.out.println("Email    : " + user.email);
+    //         System.out.println("Username : " + user.username);
+    //         System.out.println("Nama     : " + user.name);
+    //         System.out.println("Email    : " + user.email);
 
-            System.out.println("\nMenu:");
-            System.out.println("1. Edit Nama");
-            System.out.println("2. Edit Email");
-            System.out.println("3. Back");
-            System.out.print("\nPilih: ");
+    //         System.out.println("\nMenu:");
+    //         System.out.println("1. Edit Nama");
+    //         System.out.println("2. Edit Email");
+    //         System.out.println("3. Back");
+    //         System.out.print("\nPilih: ");
 
-            while (!sc.hasNextInt()) {
-                System.out.print("Masukkan angka: ");
-                sc.next();
-            }
-            choice = sc.nextInt();
-            sc.nextLine(); // clear buffer
+    //         while (!sc.hasNextInt()) {
+    //             System.out.print("Masukkan angka: ");
+    //             sc.next();
+    //         }
+    //         choice = sc.nextInt();
+    //         sc.nextLine(); // clear buffer
 
-            switch (choice) {
-                case 1 -> {
-                    System.out.print("Masukkan nama baru: ");
-                    String newName = sc.nextLine();
-                    user.name = newName;
-                    System.out.println(" Nama berhasil diupdate!");
-                    pause();
-                }
-                case 2 -> {
-                    String newEmail;
-                    while (true) {
-                        System.out.print("Masukkan email baru (@gmail.com): ");
-                        newEmail = sc.nextLine();
-                        if (newEmail.endsWith("@gmail.com")) break;
-                        System.out.println(" Email harus diakhiri dengan @gmail.com");
-                    }
-                    user.email = newEmail;
-                    System.out.println(" Email berhasil diupdate!");
-                    pause();
-                }
-                case 3 -> { return; }
-                default -> System.out.println(" Pilihan tidak valid!");
-            }
-        }
-    }
+    //         switch (choice) {
+    //             case 1 -> {
+    //                 System.out.print("Masukkan nama baru: ");
+    //                 String newName = sc.nextLine();
+    //                 user.name = newName;
+    //                 System.out.println(" Nama berhasil diupdate!");
+    //                 pause();
+    //             }
+    //             case 2 -> {
+    //                 String newEmail;
+    //                 while (true) {
+    //                     System.out.print("Masukkan email baru (@gmail.com): ");
+    //                     newEmail = sc.nextLine();
+    //                     if (newEmail.endsWith("@gmail.com")) break;
+    //                     System.out.println(" Email harus diakhiri dengan @gmail.com");
+    //                 }
+    //                 user.email = newEmail;
+    //                 System.out.println(" Email berhasil diupdate!");
+    //                 pause();
+    //             }
+    //             case 3 -> { return; }
+    //             default -> System.out.println(" Pilihan tidak valid!");
+    //         }
+    //     }
+    // }
 
 
     // =========================================================
@@ -288,55 +286,53 @@ public class MainMenu {
     }
 
     private void selectBookDetail(Reader user) {
-        if (bookDB.allBooks.isEmpty()) {
-            System.out.println("\n Tidak ada buku di database!");
-            pause(); return;
-        }
-
-        System.out.print("Masukkan judul buku: ");
-        String title = sc.nextLine();
-
-        Book selected = bookDB.getBookByTitle(title);
-
-        if (selected == null) {
-            System.out.println("\n Buku tidak ditemukan!");
-            pause(); return;
-        }
-
-        clearScreen();
-        System.out.println("╔═════════════════════════════╗");
-        System.out.println("║         DETAIL BUKU         ║");
-        System.out.println("╚═════════════════════════════╝\n");
-
-        System.out.println("Judul   : " + selected.title);
-        System.out.println("Author  : " + selected.author);
-        System.out.println("Genre   : " + selected.genre);
-        System.out.println("Tag     : " + selected.tag);
-        System.out.println("Rating  : " + selected.rating);
-        System.out.println("Terakhir: " + selected.lastDate);
-
-        System.out.println("\nApa yang ingin kamu lakukan?");
-        System.out.println("1. Tambahkan ke Favorite");
-        System.out.println("2. Tambahkan ke Library");
-        System.out.println("3. Kembali");
-
-        System.out.print("\nPilih: ");
-        int opt = getInt();
-
-        switch (opt) {
-            case 1 -> {
-                user.favorites.addFavorite(selected);
-                System.out.println("\n Ditambahkan ke Favorite!");
+            if (bookDB.allBooks.isEmpty()) {
+                System.out.println("\n Tidak ada buku di database!");
+                pause(); return;
             }
-            case 2 -> {
-                user.addToReadingList(selected);
-                System.out.println("\n Ditambahkan ke Reading Queue!");
-            }
-            case 3 -> { return; }
-            default -> System.out.println("\n⚠ Input tidak valid!");
-        }
 
-        pause();
+            System.out.print("Masukkan judul buku: ");
+            String title = sc.nextLine();
+
+            Book selected = bookDB.getBookByTitle(title);
+
+            if (selected == null) {
+                System.out.println("\n Buku tidak ditemukan!");
+                pause(); return;
+            }
+
+            clearScreen();
+            System.out.println("╔═════════════════════════════╗");
+            System.out.println("║         DETAIL BUKU         ║");
+            System.out.println("╚═════════════════════════════╝\n");
+
+            System.out.println("Judul   : " + selected.title);
+            System.out.println("Author  : " + selected.author);
+            System.out.println("Genre   : " + selected.genre);
+            System.out.println("Tag     : " + selected.tag);
+            System.out.println("Rating  : " + selected.rating);
+            System.out.println("Terakhir: " + selected.lastDate);
+
+            System.out.println("\nApa yang ingin kamu lakukan?");
+            System.out.println("1. Tambahkan ke Favorite");
+            System.out.println("2. Tambahkan ke Library");
+            System.out.println("3. Kembali");
+
+            System.out.print("\nPilih: ");
+            int opt = getInt();
+
+            switch (opt) {
+                case 1 -> {
+                    user.favorites.addFavorite(selected);
+                }
+                case 2 -> {
+                    user.addToReadingList(selected);
+                    System.out.println("Berhasil ditambahkan ke library.");
+                }
+                case 3 -> { return; }
+                default -> System.out.println("\n⚠ Input tidak valid!");
+            }
+
     }
 
     // =========================================================
