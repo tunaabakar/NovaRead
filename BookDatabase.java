@@ -9,34 +9,41 @@ public class BookDatabase {
         allBooks.addLast(b);
     }
 
-    public Book findByTitle(String title) {
-        DoublyLinkedList cur = allBooks.getHead();
-        while (cur != null) {
-            if (cur.data != null && cur.data.title != null &&
-                    cur.data.title.equalsIgnoreCase(title)) {
-                return cur.data;
-            }
-            cur = cur.next;
-        }
-        return null;
-    }
 
-    public Book searchOneByTitle(String title) {
-        DoublyLinkedList current = allBooks.getHead();
+    // public Book searchOneByTitle(String title) {
+    //     DoublyLinkedList current = allBooks.getHead();
+
+    //     while (current != null) {
+    //         Book b = current.data;
+    //         if (b.title != null && b.title.equalsIgnoreCase(title)) {
+    //             return b;
+    //         }
+    //         current = current.next;
+    //     }
+
+    //     return null; // kalau tidak ditemukan
+    // }
+    public Book getBookByTitle(String title) {
+        DoublyLinkedList current = allBooks.head;
 
         while (current != null) {
-            Book b = current.data;
-            if (b.title != null && b.title.equalsIgnoreCase(title)) {
-                return b;
+            if (current.data != null) {
+                String bookTitle = current.data.title.toLowerCase();
+                String input = title.toLowerCase();
+
+                if (bookTitle.contains(input)) {
+                    return current.data;
+                }
             }
             current = current.next;
         }
 
-        return null; // kalau tidak ditemukan
+        return null; // tidak ditemukan
     }
 
     public void printAllDatabase() {
         System.out.println("=== Semua Buku di Database ===");
         allBooks.display();
     }
+
 }

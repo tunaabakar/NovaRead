@@ -93,4 +93,18 @@ public class Favorite {
             current = current.next;
         }
     }
+    public void printFavoriteTop3() {
+        if (tail == null) {
+            System.out.println("No favorite books.");
+            return;
+        }
+        Favorite current = tail; // Buku paling baru
+        int count = 0;
+        while (current != null && count < 3) {
+            System.out.println("- " + current.book.title + " by " + current.book.author);
+            current = current.prev; // Mundur (seperti Stack)
+            count++;
+        }
+    }
+
 }

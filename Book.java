@@ -24,27 +24,24 @@ public class Book {
         this.title = title;
     }
 
-    @Override
-public String toString() {
-    StringBuilder sb = new StringBuilder();
-
-    sb.append(title).append(" - ").append(author).append("\n");
-    sb.append("    Genre  : ").append(genre).append("\n");
-    sb.append("    Rating : ").append(String.format("%.1f", rating)).append("\n");
-    sb.append("    Tag    : ").append(tag).append("\n");
-    sb.append("    Last   : ").append(lastDate);
-
-    return sb.toString();
-}
-
     
+    public String formatDisplay() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(title).append(" - ").append(author).append("\n");
+        sb.append("    Genre  : ").append(genre).append("\n");
+        sb.append("    Rating : ").append(String.format("%.1f", rating)).append("\n");
+        sb.append("    Tag    : ").append(tag).append("\n");
+        sb.append("    Last   : ").append(lastDate);
+
+        return sb.toString();
+    }
 
     public String getTitle() {
         return title;
     }
 
-    public double getRating() { 
+    public double getRating() {
         return rating;
     }
-
 }

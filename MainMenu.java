@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private ReaderList readerList;
-    private BookDatabase bookDB;
+    final ReaderList readerList;
+    final BookDatabase bookDB;
     private Searching searching = new Searching();
     private Tree tree = new Tree();
-    private Scanner sc;
+    final Scanner sc;
 
     public MainMenu(ReaderList readerList, BookDatabase bookDB, Searching searching, Tree tree) {
         this.readerList = readerList;
@@ -16,17 +16,13 @@ public class MainMenu {
         this.sc = new Scanner(System.in);
     }
 
-    // =========================================================
-    //                  CLEAR SCREEN / "CLS"
-    // =========================================================
-    private void clearScreen() {
-        // ANSI escape code, biasanya berfungsi di terminal VS Code
+    public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-
-        // Kalau suatu saat di tempat lain tidak berfungsi,
-        // kamu bisa ganti dengan:
-        // for (int i = 0; i < 50; i++) System.out.println();
+    }
+    private void pause() {
+        System.out.print("\nTekan ENTER untuk melanjutkan...");
+        sc.nextLine();
     }
 
     // =========================================================
@@ -57,7 +53,7 @@ public class MainMenu {
                     System.out.println("\nTerima kasih telah menggunakan NOVAREAD! 📚");
                     return;
                 }
-                default -> System.out.println("\n⚠ Pilihan tidak valid!");
+                default -> System.out.println("\n Pilihan tidak valid!");
             }
         }
     }
@@ -72,19 +68,28 @@ public class MainMenu {
         System.out.println("║       REGISTER       ║");
         System.out.println("╚══════════════════════╝");
 
+        if (sc.hasNextLine()){ sc.nextLine();}
+
         System.out.print("\nBuat Username : ");
         String username = sc.nextLine();
 
         if (readerList.exists(username)) {
-            System.out.println("\n⚠ Username telah digunakan!");
+            System.out.println("\n Username telah digunakan!");
             return;
         }
 
         System.out.print("Buat Password : ");
         String password = sc.nextLine();
 
-        readerList.addReader(username, password);
-        System.out.println("\n✔ Register berhasil!");
+        System.out.print("Nama Lengkap : ");
+        String name = sc.nextLine();
+
+        System.out.print("Email : ");
+        String email = sc.nextLine();
+
+        readerList.addReader(username, password, name, email);
+        System.out.println("\n Register berhasil!");
+        pause();
     }
 
     // =========================================================
@@ -97,6 +102,8 @@ public class MainMenu {
         System.out.println("║        LOGIN       ║");
         System.out.println("╚════════════════════╝");
 
+        if (sc.hasNextLine()){ sc.nextLine();}
+        
         System.out.print("\nUsername : ");
         String username = sc.nextLine();
 
@@ -106,57 +113,120 @@ public class MainMenu {
         Reader user = readerList.login(username, password);
 
         if (user == null) {
-            System.out.println("\n⚠ Login gagal!");
+            System.out.println("\n Login gagal!");
+            pause();
             return;
         }
 
-        System.out.println("\n✔ Welcome, " + user.username + "!");
+        System.out.println("\n Welcome, " + user.username + "!"); 
         userMenu(user);
     }
 
     // =========================================================
     //                       USER MENU
     // =========================================================
-    private void userMenu(Reader user) {
+    private void userMenu(Reader user){
         int option;
 
         while (true) {
             printBanner();
-            System.out.println("╔════════════════════════════╗");
-            System.out.println("║         USER MENU          ║");
-            System.out.println("╚════════════════════════════╝\n");
-
+            System.out.println("════════════════════════════════════════════════════════");
+            System.out.println("     "+user.name+" MENU");
+            System.out.println("════════════════════════════════════════════════════════\n");
+            //bakal ngelihatin reading history kita(buku terakhir yang ditambahkan)
+            System.out.println("═════════Your History════════");
+            user.showLastHistory();
+            //ngelihatin list buku favorite
+            System.out.println("════════Your Favorites═══════");
+            user.showTopFavorites();
             System.out.println(" 1. Show All Books");
             System.out.println(" 2. Search Book");
-            System.out.println(" 3. Add Book to Favorites");
-            System.out.println(" 4. Show My Favorite Books");
-            System.out.println(" 5. Add Book to Reading Queue");
-            System.out.println(" 6. Read Next Book");
-            System.out.println(" 7. Show Reading History");
-            System.out.println(" 8. Logout");
-
+            System.out.println(" 3. Show My Library");
+            System.out.println(" 4. Show My Favorite");
+            System.out.println(" 5. Show My Profile");
+            System.out.println(" 6. Logout");
             System.out.print("\nChoose: ");
             option = getInt();
 
             switch (option) {
-                case 1 -> bookDB.printAllDatabase();
+                case 1 -> {
+                    bookDB.printAllDatabase();
+                    System.out.println("\n1. Lihat detail buku");
+                    System.out.println("2. Kembali");
+                    System.out.print("Pilih: ");
+                    int pilih = getInt();
+                    if (pilih == 1) {
+                        selectBookDetail(user);
+                        pause();
+                    }
+                }
                 case 2 -> searchMenu();
-                case 3 -> addFavorite(user);
+                case 3 -> user.showMyLibrary();
                 case 4 -> {
-                    System.out.println("\n📚 Favorite Books:");
+                    System.out.println("\n Favorite Books:");
                     user.favorites.printFavorite();
                 }
-                case 5 -> addToReadingQueue(user);
-                case 6 -> readNextBook(user);
-                case 7 -> showReadingHistory(user);
-                case 8 -> {
-                    System.out.println("\n✔ Logged out.");
+                case 5 -> ProfileMenu(user);
+                case 6 -> {
+                    System.out.println("\n Logged out.");
                     return;
                 }
-                default -> System.out.println("\n⚠ Invalid option!");
+                default -> System.out.println("\n Invalid option!");
             }
         }
     }
+    public void ProfileMenu(Reader user) {
+        int choice;
+
+        while (true) {
+            clearScreen();
+            System.out.println("╔══════════════════════════════╗");
+            System.out.println("║          USER PROFILE        ║");
+            System.out.println("╚══════════════════════════════╝\n");
+
+            System.out.println("Username : " + user.username);
+            System.out.println("Nama     : " + user.name);
+            System.out.println("Email    : " + user.email);
+
+            System.out.println("\nMenu:");
+            System.out.println("1. Edit Nama");
+            System.out.println("2. Edit Email");
+            System.out.println("3. Back");
+            System.out.print("\nPilih: ");
+
+            while (!sc.hasNextInt()) {
+                System.out.print("Masukkan angka: ");
+                sc.next();
+            }
+            choice = sc.nextInt();
+            sc.nextLine(); // clear buffer
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Masukkan nama baru: ");
+                    String newName = sc.nextLine();
+                    user.name = newName;
+                    System.out.println(" Nama berhasil diupdate!");
+                    pause();
+                }
+                case 2 -> {
+                    String newEmail;
+                    while (true) {
+                        System.out.print("Masukkan email baru (@gmail.com): ");
+                        newEmail = sc.nextLine();
+                        if (newEmail.endsWith("@gmail.com")) break;
+                        System.out.println(" Email harus diakhiri dengan @gmail.com");
+                    }
+                    user.email = newEmail;
+                    System.out.println(" Email berhasil diupdate!");
+                    pause();
+                }
+                case 3 -> { return; }
+                default -> System.out.println(" Pilihan tidak valid!");
+            }
+        }
+    }
+
 
     // =========================================================
     //                      SEARCH BOOK
@@ -170,7 +240,7 @@ public class MainMenu {
 
         System.out.println(" 1. Search by Title");
         System.out.println(" 2. Search by Author");
-        System.out.println(" 3. Search by Genre (TREE)");
+        System.out.println(" 3. Search by Genre");
         System.out.println(" 4. Search by Tag");
         System.out.println(" 5. Back");
 
@@ -197,76 +267,76 @@ public class MainMenu {
                 searching.searchByTag(list, sc.nextLine());
             }
             case 5 -> { /* back */ }
-            default -> System.out.println("\n⚠ Invalid input!");
+            default -> System.out.println("\n Invalid input!");
         }
     }
 
-    // =========================================================
-    //                      ADD FAVORITE
-    // =========================================================
-    private void addFavorite(Reader user) {
-        printBanner();
-        System.out.println("╔════════════════════════╗");
-        System.out.println("║      ADD FAVORITE      ║");
-        System.out.println("╚════════════════════════╝\n");
+    public void displayBookDetail(Book book) {
+        clearScreen();
+        System.out.println("═════════════════════════════╗");
+        System.out.println("       "+ book.title +"      ");
+        System.out.println("═════════════════════════════╝\n");
 
-        System.out.print("Judul Buku : ");
+        System.out.println("Author  : " + book.author);
+        System.out.println("Genre   : " + book.genre);
+        System.out.println("Tag     : " + book.tag);
+        System.out.println("Rating  : " + book.rating);
+        System.out.println("Terakhir: " + book.lastDate);
+        System.out.println("Sinopsis: " + book.desc);
+
+        pause();    // kembali ke menu sebelumnya
+    }
+
+    private void selectBookDetail(Reader user) {
+        if (bookDB.allBooks.isEmpty()) {
+            System.out.println("\n Tidak ada buku di database!");
+            pause(); return;
+        }
+
+        System.out.print("Masukkan judul buku: ");
         String title = sc.nextLine();
 
-        Book book = bookDB.searchOneByTitle(title);
+        Book selected = bookDB.getBookByTitle(title);
 
-        if (book == null) {
-            System.out.println("\n⚠ Buku tidak ditemukan!");
-            return;
+        if (selected == null) {
+            System.out.println("\n Buku tidak ditemukan!");
+            pause(); return;
         }
 
-        user.favorites.addFavorite(book);
-    }
+        clearScreen();
+        System.out.println("╔═════════════════════════════╗");
+        System.out.println("║         DETAIL BUKU         ║");
+        System.out.println("╚═════════════════════════════╝\n");
 
-    // =========================================================
-    //             ADD TO READING QUEUE (STACK)
-    // =========================================================
-    private void addToReadingQueue(Reader user) {
-        printBanner();
-        System.out.println("╔══════════════════════════════════╗");
-        System.out.println("║      ADD TO READING QUEUE       ║");
-        System.out.println("╚══════════════════════════════════╝\n");
+        System.out.println("Judul   : " + selected.title);
+        System.out.println("Author  : " + selected.author);
+        System.out.println("Genre   : " + selected.genre);
+        System.out.println("Tag     : " + selected.tag);
+        System.out.println("Rating  : " + selected.rating);
+        System.out.println("Terakhir: " + selected.lastDate);
 
-        System.out.print("Judul Buku : ");
-        String title = sc.nextLine();
+        System.out.println("\nApa yang ingin kamu lakukan?");
+        System.out.println("1. Tambahkan ke Favorite");
+        System.out.println("2. Tambahkan ke Library");
+        System.out.println("3. Kembali");
 
-        Book book = bookDB.searchOneByTitle(title);
+        System.out.print("\nPilih: ");
+        int opt = getInt();
 
-        if (book == null) {
-            System.out.println("\n⚠ Buku tidak ditemukan!");
-            return;
+        switch (opt) {
+            case 1 -> {
+                user.favorites.addFavorite(selected);
+                System.out.println("\n Ditambahkan ke Favorite!");
+            }
+            case 2 -> {
+                user.addToReadingList(selected);
+                System.out.println("\n Ditambahkan ke Reading Queue!");
+            }
+            case 3 -> { return; }
+            default -> System.out.println("\n⚠ Input tidak valid!");
         }
 
-        user.addToReadingList(book);
-    }
-
-    // =========================================================
-    //                 READ NEXT BOOK
-    // =========================================================
-    private void readNextBook(Reader user) {
-        printBanner();
-        System.out.println("╔══════════════════════════════╗");
-        System.out.println("║        READ NEXT BOOK        ║");
-        System.out.println("╚══════════════════════════════╝\n");
-
-        user.readNextBook();
-    }
-
-    // =========================================================
-    //                 SHOW READING HISTORY
-    // =========================================================
-    private void showReadingHistory(Reader user) {
-        printBanner();
-        System.out.println("╔══════════════════════════════╗");
-        System.out.println("║        READING HISTORY       ║");
-        System.out.println("╚══════════════════════════════╝\n");
-
-        user.showHistory();
+        pause();
     }
 
     // =========================================================
@@ -282,20 +352,21 @@ public class MainMenu {
         return val;
     }
 
+
     // =========================================================
     //                         BANNER
     // =========================================================
     private void printBanner() {
         clearScreen();   // <<--- INI YANG BIKIN EFEK "CLS"
 
-       System.out.println("                                                               ");
-System.out.println("   ▄▄     ▄▄▄                  ▄▄▄▄▄▄                     ");
-System.out.println("   ██▄   ██▀                  █▀██▀▀▀█▄                 █▄");
-System.out.println("   ███▄  ██                     ██▄▄▄█▀                 ██");
-System.out.println("   ██ ▀█▄██ ▄███▄▀█▄ ██▀▄▀▀█▄   ██▀▀█▄   ▄█▀█▄ ▄▀▀█▄ ▄████");
-System.out.println("   ██   ▀██ ██ ██ ██▄██ ▄█▀██ ▄ ██  ██   ██▄█▀ ▄█▀██ ██ ██");
-System.out.println(" ▀██▀    ██▄▀███▀  ▀█▀ ▄▀█▄██ ▀██▀  ▀██▀▄▀█▄▄▄▄▀█▄██▄█▀███");
-System.out.println("                                                               ");
-System.out.println("                                                               ");
+        System.out.println("                                                               ");
+        System.out.println("   ▄▄     ▄▄▄                  ▄▄▄▄▄▄                     ");
+        System.out.println("   ██▄   ██▀                  █▀██▀▀▀█▄                 █▄");
+        System.out.println("   ███▄  ██                     ██▄▄▄█▀                 ██");
+        System.out.println("   ██ ▀█▄██ ▄███▄▀█▄ ██▀▄▀▀█▄   ██▀▀█▄   ▄█▀█▄ ▄▀▀█▄ ▄████");
+        System.out.println("   ██   ▀██ ██ ██ ██▄██ ▄█▀██ ▄ ██  ██   ██▄█▀ ▄█▀██ ██ ██");
+        System.out.println(" ▀██▀    ██▄▀███▀  ▀█▀ ▄▀█▄██ ▀██▀  ▀██▀▄▀█▄▄▄▄▀█▄██▄█▀███");
+        System.out.println("                                                               ");
+        System.out.println("                                                               ");
     }
 }

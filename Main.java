@@ -9,6 +9,7 @@ public class Main {
         sc.nextLine();
         System.out.println();
     }
+    
 
     // ===== GARIS PEMBATAS =====
     private static void line() {
@@ -99,11 +100,14 @@ public class Main {
         tree.insertBookToGenre(b18.genre, b18);
 
         // ==================== DATA PEMBACA ====================
-        System.out.println("Memuat data pembaca...");
-        readerList.addReader("alice", "pass123");
-        readerList.addReader("bob", "password");
-        readerList.addReader("admin", "admin123");
-        System.out.println("Data pembaca berhasil dimuat!");
+        readerList.addReader("meisya", "12345", "Meisya Ananda Puteri", "meisya@gmail.com");
+        readerList.addReader("ridho", "12345", "Ridho Hidayat", "ridho@gmail.com");
+        readerList.addReader("wahyu", "12345", "Wahyu Indra Purnama", "wahyu@gmail.com");
+        readerList.addReader("lalu", "12345", "Lalu Abdullah Rafi Asyari", "lalu@gmail.com");
+        readerList.addReader("nadine", "12345", "Nadine Desvita Alifia Putri", "nadine@gmail.com");
+        readerList.addReader("muhammad", "12345", "Muhammad Asrofi Sazani", "muhammad@gmail.com");
+        readerList.addReader("mutia", "12345", "Mutia Ayu Safitri", "mutia@gmail.com");
+
         pause();
 
         // ==================== MASUK MAIN MENU ====================

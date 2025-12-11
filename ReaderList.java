@@ -17,8 +17,8 @@ public class ReaderList {
     }
 
     // REGISTER
-    public void addReader(String username, String password) {
-        Reader newReader = new Reader(username, password);
+    public void addReader(String username, String password, String name, String email) {
+        Reader newReader = new Reader(username, password, name, email);
         Node newNode = new Node(newReader);
 
         if (head == null) {
@@ -35,14 +35,35 @@ public class ReaderList {
 
     // LOGIN
     public Reader login(String username, String password) {
-        Node temp = head;
-        while (temp != null) {
-            if (temp.data.username.equals(username) && temp.data.password.equals(password)) {
-                return temp.data;
-            }
-            temp = temp.next;
+        // username = username.trim();
+        // password = password.trim();
+
+        // Node temp = head;
+        // while (temp != null) {
+        //     if (temp.data.username.trim().equals(username) &&
+        //         temp.data.password.trim().equals(password)) {
+        //         return temp.data;
+        //     }
+        //     temp = temp.next;
+        // }
+        // return null;
+        System.out.println("DEBUG INPUT USERNAME = [" + username + "]");
+    System.out.println("DEBUG INPUT PASSWORD = [" + password + "]");
+
+    Node temp = head;
+    while (temp != null) {
+        System.out.println("DEBUG DATA USERNAME = [" + temp.data.username + "]");
+        System.out.println("DEBUG DATA PASSWORD = [" + temp.data.password + "]");
+
+        if (temp.data.username.equals(username) &&
+            temp.data.password.equals(password)) {
+            System.out.println("MATCH FOUND");
+            return temp.data;
         }
-        return null; // tidak ditemukan
+        temp = temp.next;
+    }
+    System.out.println("NO MATCH");
+    return null;
     }
 
     // Cek username sudah ada atau belum

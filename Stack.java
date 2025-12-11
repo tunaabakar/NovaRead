@@ -53,4 +53,20 @@ public class Stack {
         }
         System.out.println("====================");
     }
+
+    public void displayTop3() {
+        if (isEmpty()) {
+            System.out.println("Belum ada history bacaan.");
+            return;
+        }
+        Node current = top;
+        int count = 0;
+        while (current != null && count < 3) {
+            System.out.println("- " + current.data.title);
+            current = current.next;
+            count++;
+        }
+        System.out.println("================================");
+    }
+
 }

@@ -19,4 +19,22 @@ public class Library {
         bookList.display();
     }
 
+    public Book getBookByTitle(String title) {
+        DoublyLinkedList current = bookList.head;
+
+        while (current != null) {
+            if (current.data != null) {
+                String bookTitle = current.data.title.toLowerCase();
+                String input = title.toLowerCase();
+
+                if (bookTitle.contains(input)) {
+                    return current.data;
+                }
+            }
+            current = current.next;
+        }
+
+        return null; // tidak ditemukan
+    }
+
 }
