@@ -23,7 +23,7 @@ public class Sorting {
                 current = current.next;
             }
         } while (swapped);
-        System.out.println(">> Berhasil diurutkan berdasarkan Judul (A-Z).\\n");
+        System.out.println(">> Berhasil diurutkan berdasarkan Judul (A-Z).");
     }
 
     // Mengurutkan berdasarkan rating
@@ -47,7 +47,7 @@ public class Sorting {
                 current = current.next;
             }
         } while (swapped);
-        System.out.println(">> Berhasil diurutkan berdasarkan Rating (Tinggi ke Rendah).\\n");
+        System.out.println(">> Berhasil diurutkan berdasarkan Rating (Tinggi ke Rendah).");
     }
 
     // Mengurutkan berdasarkan tanggal
@@ -73,33 +73,33 @@ public class Sorting {
                 current = current.next;
             }
         } while (swapped);
-        System.out.println(">> Berhasil diurutkan berdasarkan Tanggal (Terbaru).\\n");
+        System.out.println(">> Berhasil diurutkan berdasarkan Tanggal (Terbaru).");
     }
 
-    // Mengurutkan berdasarkan genre
-    public static void sortByGenre(DoublyLinkedList list) {
-        if (list == null)
-            return;
-        DoublyLinkedList head = list.getHead();
-        if (head == null)
-            return;
-        boolean swapped;
-        do {
-            swapped = false;
-            DoublyLinkedList current = head;
-            while (current.next != null) {
-                String g1 = current.data.genre == null ? "" : current.data.genre;
-                String g2 = current.next.data.genre == null ? "" : current.next.data.genre;
-                if (g1.compareToIgnoreCase(g2) > 0) {
-                    Book tmp = current.data;
-                    current.data = current.next.data;
-                    current.next.data = tmp;
-                    swapped = true;
-                }
-                current = current.next;
-            }
-        } while (swapped);
-        System.out.println(">> Berhasil dikelompokkan berdasarkan Genre.\\n");
-    }
+    // // Mengurutkan berdasarkan genre
+    // public static void sortByGenre(DoublyLinkedList list) {
+    //     if (list == null)
+    //         return;
+    //     DoublyLinkedList head = list.getHead();
+    //     if (head == null)
+    //         return;
+    //     boolean swapped;
+    //     do {
+    //         swapped = false;
+    //         DoublyLinkedList current = head;
+    //         while (current.next != null) {
+    //             String g1 = current.data.genre == null ? "" : current.data.genre;
+    //             String g2 = current.next.data.genre == null ? "" : current.next.data.genre;
+    //             if (g1.compareToIgnoreCase(g2) > 0) {
+    //                 Book tmp = current.data;
+    //                 current.data = current.next.data;
+    //                 current.next.data = tmp;
+    //                 swapped = true;
+    //             }
+    //             current = current.next;
+    //         }
+    //     } while (swapped);
+    //     System.out.println(">> Berhasil dikelompokkan berdasarkan Genre.\\n");
+    // }
 
 }

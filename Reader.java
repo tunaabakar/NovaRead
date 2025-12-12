@@ -7,8 +7,7 @@ public class Reader {
     Queue readingQueue;   // Antrian buku untuk dibaca (FIFO)
     DoublyLinkedList readingList; 
     Favorite favorites;
-    MainMenu menu;
-    
+    final Scanner sc;
 
     public Reader(String uname, String pwd, String nm, String em) {
         this.username = uname;
@@ -21,22 +20,39 @@ public class Reader {
         this.history = new Stack();       // Dan di sini
         this.readingList = new DoublyLinkedList();
         this.favorites = new Favorite();
+        this.sc = new Scanner(System.in);
     }
 
-    // public Reader(String uname, String pass) {
-    //     this.username = uname;
-    //     this.password = pass;
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
-    //     this.library = new Library();
-    //     this.readingQueue = new Queue();  // Perbaikan
-    //     this.history = new Stack();       // Perbaikan
-    //     this.readingList = new DoublyLinkedList();
-    //     this.favorites = new Favorite();
-    // }
+    private void pause() {
+        System.out.print("\nTekan ENTER untuk melanjutkan...");
+        sc.nextLine();
+    }
+
+    public void displayBookDetail(Book book) {
+        clearScreen();
+        System.out.println();
+        System.out.println("═════════════════════════════╗");
+        System.out.println("       "+ book.title +"      ");
+        System.out.println("═════════════════════════════╝\n");
+
+        System.out.println("Author  : " + book.author);
+        System.out.println("Genre   : " + book.genre);
+        System.out.println("Tag     : " + book.tag);
+        System.out.println("Rating  : " + book.rating);
+        System.out.println("Terakhir: " + book.lastDate);
+        System.out.println("Sinopsis: " + book.desc);
+        pause();
+    }
 
     public void removeFromLibrary() {
         if (library.bookList.isEmpty()) {
             System.out.println("\nLibrary kamu masih kosong.");
+            pause();
             return;
         }
 
@@ -61,8 +77,10 @@ public class Reader {
         if (bookToRemove != null) {
             library.bookList.remove(bookToRemove);
             System.out.println("\n✔ Buku \"" + title + "\" berhasil dihapus dari library.");
+            pause();
         } else {
             System.out.println("\n⚠ Buku \"" + title + "\" tidak ditemukan di library.");
+            pause();
         }
     }
 
@@ -70,6 +88,7 @@ public class Reader {
     public void showMyLibrary() {
         if (library.bookList.isEmpty()) {
             System.out.println("\nLibrary kamu masih kosong.");
+            pause();
             return;
         }
 
@@ -90,8 +109,8 @@ public class Reader {
             pilih = sc.nextInt();
 
             switch (pilih) {
-                case 1 -> sortingMenu();        // buka submenu sorting
-                case 2 -> viewBookDetailFromLibrary();  // pilih 1 buku untuk dibaca
+                case 1 -> sortingMenu();        
+                case 2 -> viewBookDetailFromLibrary();
                 case 3 -> removeFromLibrary();
                 case 4 -> { return; }
                 default -> System.out.println("Invalid choice!");
@@ -107,7 +126,7 @@ public class Reader {
 
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        // while (true) {
             System.out.println("\n=== Sorting Menu ===");
             System.out.println("1. Sort by Last Date (Terbaru dulu)");
             System.out.println("2. Sort by Title (A-Z)");
@@ -119,19 +138,20 @@ public class Reader {
             sc.nextLine(); // buang newline
 
             switch (choice) {
-                case 1 -> Sorting.sortByDate(library.bookList);
-                case 2 -> Sorting.sortByTitle(library.bookList);
-                case 3 -> Sorting.sortByRating(library.bookList);
+                case 1 -> {Sorting.sortByDate(library.bookList); pause();}
+                case 2 -> {Sorting.sortByTitle(library.bookList); pause();}
+                case 3 -> {Sorting.sortByRating(library.bookList); pause();}
                 case 4 -> { return; }
                 default -> System.out.println("Pilihan tidak valid!");
             }
-        }
+        // }
     }
 
 
     public void viewBookDetailFromLibrary() {
         if (library.bookList.isEmpty()) {
             System.out.println("Library kosong!");
+            pause();
             return;
         }
 
@@ -141,15 +161,15 @@ public class Reader {
         System.out.print("\nMasukkan judul buku untuk lihat detail: ");
         String title = sc.nextLine();
 
-        // pakai getBookByTitle dari BookDatabase
         Book selected = library.getBookByTitle(title);
 
         if (selected == null) {
             System.out.println("Buku tidak ditemukan!");
+            pause();
             return;
         }
 
-        menu.displayBookDetail(selected); // tampilkan detail buku
+        displayBookDetail(selected); // tampilkan detail buku
     }
 
     // Tambah ke antrian baca (FIFO)
@@ -166,6 +186,7 @@ public class Reader {
         }
         System.out.println("=== History Bacaan (Terbaru di Atas) ===");
         history.display();
+        pause();
     }
 
     public void showLastHistory() {
@@ -175,25 +196,26 @@ public class Reader {
     public void showTopFavorites() {
         favorites.printFavoriteTop3();
     }
-
-    // Membaca buku berikutnya → Queue keluar duluan → masuk Stack history
-    public void readNextBook() {
-        if (readingQueue.isEmpty()) {
-            System.out.println("Tidak ada buku dalam antrian!");
-            return;
-        }
-
-        Book next = readingQueue.dequeue();
-        System.out.println("Membaca buku: " + next.title);
-
-        // Masukkan ke history (Stack)
-        history.push(next);
-
-        // Simpan juga ke readingList
-        readingList.addLast(next);
-    }
-
+    
     public DoublyLinkedList getReadingList() {
         return readingList;
     }
+    
+    // // Membaca buku berikutnya → Queue keluar duluan → masuk Stack history
+    // public void readNextBook() {
+    //     if (readingQueue.isEmpty()) {
+    //         System.out.println("Tidak ada buku dalam antrian!");
+    //         return;
+    //     }
+
+    //     Book next = readingQueue.dequeue();
+    //     System.out.println("Membaca buku: " + next.title);
+
+    //     // Masukkan ke history (Stack)
+    //     history.push(next);
+
+    //     // Simpan juga ke readingList
+    //     readingList.addLast(next);
+    // }
+
 }

@@ -118,7 +118,8 @@ public class MainMenu {
             return;
         }
 
-        System.out.println("\n Welcome, " + user.username + "!"); 
+        System.out.println("\n Welcome, " + user.username + "!");
+        pause();
         userMenu(user);
     }
 
@@ -136,9 +137,11 @@ public class MainMenu {
             //bakal ngelihatin reading history kita(buku terakhir yang ditambahkan)
             System.out.println("═════════Your History════════");
             user.showLastHistory();
+            System.out.println();
             //ngelihatin list buku favorite
             System.out.println("════════Your Favorites═══════");
             user.showTopFavorites();
+            System.out.println();
             System.out.println(" 1. Show All Books");
             System.out.println(" 2. Search Book");
             System.out.println(" 3. Show My Library");
@@ -164,6 +167,7 @@ public class MainMenu {
                 case 4 -> {
                     System.out.println("\n Favorite Books:");
                     user.favorites.printFavorite();
+                    pause();
                 }
                 case 5 -> {
                     System.out.println("\n Logged out.");
@@ -251,38 +255,26 @@ public class MainMenu {
             case 1 -> {
                 System.out.print("\nKeyword Judul : ");
                 searching.searchByTitle(list, sc.nextLine());
+                pause();
             }
             case 2 -> {
                 System.out.print("\nNama Author : ");
                 searching.searchByAuthor(list, sc.nextLine());
+                pause();
             }
             case 3 -> {
                 System.out.print("\nGenre : ");
                 tree.searchByGenre(sc.nextLine());
+                pause();
             }
             case 4 -> {
                 System.out.print("\nTag : ");
                 searching.searchByTag(list, sc.nextLine());
+                pause();
             }
             case 5 -> { /* back */ }
             default -> System.out.println("\n Invalid input!");
         }
-    }
-
-    public void displayBookDetail(Book book) {
-        clearScreen();
-        System.out.println("═════════════════════════════╗");
-        System.out.println("       "+ book.title +"      ");
-        System.out.println("═════════════════════════════╝\n");
-
-        System.out.println("Author  : " + book.author);
-        System.out.println("Genre   : " + book.genre);
-        System.out.println("Tag     : " + book.tag);
-        System.out.println("Rating  : " + book.rating);
-        System.out.println("Terakhir: " + book.lastDate);
-        System.out.println("Sinopsis: " + book.desc);
-
-        pause();    // kembali ke menu sebelumnya
     }
 
     private void selectBookDetail(Reader user) {
