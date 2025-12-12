@@ -23,22 +23,16 @@ public class Reader {
         this.sc = new Scanner(System.in);
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     private void pause() {
         System.out.print("\nTekan ENTER untuk melanjutkan...");
         sc.nextLine();
     }
 
     public void displayBookDetail(Book book) {
-        clearScreen();
         System.out.println();
-        System.out.println("═════════════════════════════╗");
+        System.out.println("═══════════════════════════════════════════════");
         System.out.println("       "+ book.title +"      ");
-        System.out.println("═════════════════════════════╝\n");
+        System.out.println("═══════════════════════════════════════════════\n");
 
         System.out.println("Author  : " + book.author);
         System.out.println("Genre   : " + book.genre);
@@ -46,6 +40,7 @@ public class Reader {
         System.out.println("Rating  : " + book.rating);
         System.out.println("Terakhir: " + book.lastDate);
         System.out.println("Sinopsis: " + book.desc);
+    
         pause();
     }
 
@@ -56,7 +51,6 @@ public class Reader {
             return;
         }
 
-        Scanner sc = new Scanner(System.in);
         library.showLibrary();
 
         System.out.print("\nMasukkan judul buku yang ingin dihapus: ");
@@ -76,10 +70,10 @@ public class Reader {
 
         if (bookToRemove != null) {
             library.bookList.remove(bookToRemove);
-            System.out.println("\n✔ Buku \"" + title + "\" berhasil dihapus dari library.");
+            System.out.println("\nBuku \"" + title + "\" berhasil dihapus dari library.");
             pause();
         } else {
-            System.out.println("\n⚠ Buku \"" + title + "\" tidak ditemukan di library.");
+            System.out.println("\nBuku \"" + title + "\" tidak ditemukan di library.");
             pause();
         }
     }
@@ -92,7 +86,6 @@ public class Reader {
             return;
         }
 
-        Scanner sc = new Scanner(System.in);
         int pilih;
 
         while (true) {
@@ -107,6 +100,7 @@ public class Reader {
             System.out.print("Choose: ");
 
             pilih = sc.nextInt();
+            sc.nextLine();
 
             switch (pilih) {
                 case 1 -> sortingMenu();        
@@ -124,7 +118,6 @@ public class Reader {
             return;
         }
 
-        Scanner sc = new Scanner(System.in);
 
         // while (true) {
             System.out.println("\n=== Sorting Menu ===");
@@ -155,7 +148,6 @@ public class Reader {
             return;
         }
 
-        Scanner sc = new Scanner(System.in);
         library.showLibrary();
 
         System.out.print("\nMasukkan judul buku untuk lihat detail: ");
@@ -169,7 +161,8 @@ public class Reader {
             return;
         }
 
-        displayBookDetail(selected); // tampilkan detail buku
+        displayBookDetail(selected); 
+        history.push(selected);
     }
 
     // Tambah ke antrian baca (FIFO)
@@ -200,7 +193,7 @@ public class Reader {
     public DoublyLinkedList getReadingList() {
         return readingList;
     }
-    
+
     // // Membaca buku berikutnya → Queue keluar duluan → masuk Stack history
     // public void readNextBook() {
     //     if (readingQueue.isEmpty()) {

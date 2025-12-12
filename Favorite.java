@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Favorite {
     Book book;
     Favorite head;
@@ -88,8 +90,17 @@ public class Favorite {
 
         System.out.println("Favorite Books List:");
         Favorite current = head;
+
         while (current != null) {
-            System.out.println("- " + current.book);
+            Book b = current.book;
+
+            if (b != null) {
+                String rating = (b.rating > 0) ? String.format(" | Rating: %.1f", b.rating) : "";
+                System.out.println("- " + b.title + " by " + b.author + rating);
+            } else {
+                System.out.println("- <Unknown Book>");
+            }
+
             current = current.next;
         }
     }
@@ -104,6 +115,33 @@ public class Favorite {
             System.out.println("- " + current.book.title + " by " + current.book.author);
             current = current.prev; // Mundur (seperti Stack)
             count++;
+        }
+    }
+
+    public void manageFavoritesMenu(Scanner sc) {
+        while (true) {
+            printFavorite();
+            System.out.println("\nMenu:");
+            System.out.println("1. Remove a favorite");
+            System.out.println("2. Back");
+            System.out.print("Choose: ");
+            int choice;
+            while (!sc.hasNextInt()) {
+                System.out.print("Masukkan angka: ");
+                sc.next();
+            }
+            choice = sc.nextInt();
+            sc.nextLine(); // clear buffer
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Masukkan judul buku yang ingin dihapus: ");
+                    String title = sc.nextLine();
+                    removeFavorite(title);
+                }
+                case 2 -> { return; }
+                default -> System.out.println("Invalid option!");
+            }
         }
     }
 

@@ -66,7 +66,7 @@ public class Main {
         Book b17 = new Book(17, "Sapiens: A Brief History of Humankind", "Yuval Noah Harari", "Non-Fiction", 4.7,
                 "History, Humanity", "Exploration of the human species...", "2023-12-15");
         Book b18 = new Book(18, "Omniscient Reader's Viewpoint", "Sing Sho", "Fantasy", 5.0,
-                "Fantasy, Adventure", "“Cuma aku yang tahu akhir dunia...”", "2021-01-06");
+                "Fantasy, Adventure", "This book is only for one reader", "2021-01-06");
 
         // Masukkan buku ke database
         bookDB.addBookToDatabase(b1); bookDB.addBookToDatabase(b2);
@@ -107,6 +107,7 @@ public class Main {
         Reader r5 = readerList.addReader("nadine", "12345", "Nadine Desvita Alifia Putri", "nadine@gmail.com");
         Reader r6 = readerList.addReader("muhammad", "12345", "Muhammad Asrofi Sazani", "muhammad@gmail.com");
         Reader r7 = readerList.addReader("mutia", "12345", "Mutia Ayu Safitri", "mutia@gmail.com");
+        Reader r8 = readerList.addReader("User", "12345", "User Is Not Null", "user@gmail.com");
 
         r1.addToReadingList(b18);
         r1.addToReadingList(b9);
@@ -139,18 +140,15 @@ public class Main {
         r6.addToReadingList(b14);
         r6.addToReadingList(b2);
 
-        r7.addToReadingList(b4);
-        r7.addToReadingList(b8);
-        r7.addToReadingList(b15);
         r7.addToReadingList(b1);
+        r7.addToReadingList(b8);
+        r7.addToReadingList(b9);
+        r7.addToReadingList(b18);
 
-
-
-
-
-
-
-
+        r8.addToReadingList(b1);
+        r8.addToReadingList(b8);
+        r8.addToReadingList(b9);
+        r8.addToReadingList(b18);
 
         pause();
 

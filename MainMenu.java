@@ -16,10 +16,6 @@ public class MainMenu {
         this.sc = new Scanner(System.in);
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
     private void pause() {
         System.out.print("\nTekan ENTER untuk melanjutkan...");
         sc.nextLine();
@@ -166,14 +162,15 @@ public class MainMenu {
                 case 3 -> user.showMyLibrary();
                 case 4 -> {
                     System.out.println("\n Favorite Books:");
-                    user.favorites.printFavorite();
+                    user.favorites.manageFavoritesMenu(sc);
                     pause();
                 }
                 case 5 -> {
                     System.out.println("\n Logged out.");
+                    pause();
                     return;
                 }
-                default -> System.out.println("\n Invalid option!");
+                default -> {System.out.println("\n Invalid option!");  pause();}
             }
         }
     }
@@ -292,8 +289,6 @@ public class MainMenu {
                 System.out.println("\n Buku tidak ditemukan!");
                 pause(); return;
             }
-
-            clearScreen();
             System.out.println("╔═════════════════════════════╗");
             System.out.println("║         DETAIL BUKU         ║");
             System.out.println("╚═════════════════════════════╝\n");
@@ -316,10 +311,13 @@ public class MainMenu {
             switch (opt) {
                 case 1 -> {
                     user.favorites.addFavorite(selected);
+                    System.out.println("Berhasil ditambahkan!");
+                    pause();
                 }
                 case 2 -> {
                     user.addToReadingList(selected);
-                    System.out.println("Berhasil ditambahkan ke library.");
+                    System.out.println("Berhasil ditambahkan!");
+                    pause();
                 }
                 case 3 -> { return; }
                 default -> System.out.println("\n⚠ Input tidak valid!");
@@ -345,7 +343,6 @@ public class MainMenu {
     //                         BANNER
     // =========================================================
     private void printBanner() {
-        clearScreen();   // <<--- INI YANG BIKIN EFEK "CLS"
 
         System.out.println("                                                               ");
         System.out.println("   ▄▄     ▄▄▄                  ▄▄▄▄▄▄                     ");

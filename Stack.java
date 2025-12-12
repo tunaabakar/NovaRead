@@ -17,10 +17,19 @@ public class Stack {
     }
 
     public void push(Book book) {
+        Node current = top;
+        int count = 0;
+        while (current != null && count < 3) {
+            if (current.data.title.equalsIgnoreCase(book.title)) return; // sudah ada
+            current = current.next;
+            count++;
+        }
+
         Node newNode = new Node(book);
         newNode.next = top;
         top = newNode;
     }
+
 
     public Book pop() {
         if (isEmpty()) {
@@ -66,7 +75,7 @@ public class Stack {
             current = current.next;
             count++;
         }
-        System.out.println("================================");
+
     }
 
 }
