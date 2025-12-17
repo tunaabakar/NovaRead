@@ -43,7 +43,7 @@ public class Searching {
             if (current.data != null) {
                 Book b = current.data;
 
-                if (b.author != null && b.author.equalsIgnoreCase(authorName)) {
+                if (b.author.toLowerCase().contains(authorName.toLowerCase())) {
                     printResult(b);
                     found = true;
                 }
@@ -54,33 +54,6 @@ public class Searching {
         if (!found)
             System.out.println("   (Tidak ditemukan)");
     }
-
-    // Mencari berdasarkan genre
-    // public void searchByGenre(DoublyLinkedList list, String genre) {
-    //     if (list == null || list.getHead() == null) {
-    //         System.out.println("   (Database kosong)");
-    //         return;
-    //     }
-
-    //     DoublyLinkedList current = list.getHead();
-    //     System.out.println("\n>> Filter Genre: '" + genre + "'");
-    //     boolean found = false;
-
-    //     while (current != null) {
-    //         if (current.data != null) {
-    //             Book b = current.data;
-
-    //             if (b.genre != null && b.genre.equalsIgnoreCase(genre)) {
-    //                 printResult(b);
-    //                 found = true;
-    //             }
-    //         }
-    //         current = current.next;
-    //     }
-
-    //     if (!found)
-    //         System.out.println("   (Tidak ditemukan)");
-    // }
 
     // Mencari berdasarkan tag
     public void searchByTag(DoublyLinkedList list, String tag) {
